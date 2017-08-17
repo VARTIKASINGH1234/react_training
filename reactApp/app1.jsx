@@ -10,7 +10,7 @@ class App extends React.Component {
   }
   
   handleChange(event) {
-    this.setState({temp: event.target.value});
+    this.setState({temp: event.target.value.trim()});
   }
 
   handleButton(event) {
@@ -23,7 +23,6 @@ class App extends React.Component {
       this.state.array.push(event.target.value.trim());
       this.setState({name: event.target.value.trim()});
     }
-    event.target.value = "";
   }
   render() {
     return (
