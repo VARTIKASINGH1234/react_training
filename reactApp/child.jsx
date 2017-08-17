@@ -6,7 +6,7 @@ class Child extends React.Component {
       <div>
          <ul>
            {this.props.myName.map((item,index) => 
-              <li key={index}>{item}</li>
+              <li key={index}><button type="button">{item}</button></li>
             )}
           </ul>
        </div>
