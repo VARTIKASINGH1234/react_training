@@ -23,13 +23,15 @@ class App extends React.Component {
       this.state.array.push(event.target.value.trim());
       this.setState({name: event.target.value.trim()});
     }
+    this.setState({temp: ''});
+    ReactDOM.findDOMNode(this.refs.myInput).focus();
   }
   render() {
     return (
       <form >
         <label>
           Name:
-          <input value = {this.state.temp} type="text"  onChange={this.handleChange}/>
+          <input value = {this.state.temp} type="text"  onChange={this.handleChange} ref = "myInput"//>
         </label>
         <p>
           <button type="button" value = {this.state.temp} onClick={this.handleButton}>Submit</button>
