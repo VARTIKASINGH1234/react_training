@@ -1,11 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 class Child extends React.Component { 
   constructor(props) {
     super(props);
-    this.state = {array: [], filterArray: [], state: ""};
+    this.state = {array: [], state: ""};
     this.handleClick = this.handleClick.bind(this);
     this.handleActiveClick = this.handleActiveClick.bind(this);
     this.handleDeletedClick = this.handleDeletedClick.bind(this);
@@ -34,40 +33,16 @@ class Child extends React.Component {
 
 
   handleActiveClick(event) {
-    let array = this.state.array;
-    let newFilterArray = this.state.filterArray;
-    let length = array.length;
-    newFilterArray.splice(0, length);
-    for (let i = 0 ; i < length; i++) {
-      if (!array[i].isDeleted)
-        newFilterArray.push(array[i].name);
-    }
-    this.setState({filterArray: newFilterArray });
     this.setState({state: "Active"});
   }
  
 
   handleDeletedClick(event) {
-    let array = this.state.array;
-    let newFilterArray = this.state.filterArray;
-    let length = array.length;
-    newFilterArray.splice(0, length);
-    for(let i = 0 ; i < length; i++)
-      if (array[i].isDeleted)
-        newFilterArray.push(array[i].name);
-    this.setState({filterArray: newFilterArray });
     this.setState({state: "Deleted"});
   }
  
 
   handleAllClick(event) {
-    let array = this.state.array;
-    let newFilterArray = this.state.filterArray;
-    let length = array.length;
-    newFilterArray.splice(0, length);
-    for (let i = 0 ; i < length; i++)
-      newFilterArray.push(array[i].name);
-    this.setState({filterArray: newFilterArray });
     this.setState({state: "All"});
   }
  
@@ -90,22 +65,26 @@ class Child extends React.Component {
         <ul>   
           <button 
             type="button" 
-            onClick = {this.handleActiveClick}>Active
+            onClick = {this.handleActiveClick}>displayActiveList
           </button>
           <button 
             type="button" 
-            onClick = {this.handleDeletedClick}>Deleted
-          </button>
+            onClick = {this.handleDeletedClick}>displayDeletedList
+          </button>  
           <button 
             type="button" 
-            onClick = {this.handleAllClick}>All
+            onClick = {this.handleAllClick}>displayAllList
           </button>
           <h4 style = {{color: 'green'}}>
             {this.state.state }
           </h4>
-          {this.state.filterArray.map((item,index) => 
-              <li key={index}>{item}</li>
-            )}
+            {this.state.array.map((item,index) => {
+              if ((this.state.array[index].isDeleted && this.state.state == "Deleted") ||
+                 (!this.state.array[index].isDeleted && this.state.state == "Active") ||
+                 (this.state.state == "All")) {
+                return <li key={index}>{item.name}</li>;
+              }
+            })}
         </ul>     
       </div>
     );
