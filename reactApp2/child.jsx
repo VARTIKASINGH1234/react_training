@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class Child extends React.Component { 
   constructor(props) {
     super(props);
-    this.state = {array: [], state: ""};
+    this.state = {array: [], button: ""};
     this.handleClick = this.handleClick.bind(this);
     this.handleActiveClick = this.handleActiveClick.bind(this);
     this.handleDeletedClick = this.handleDeletedClick.bind(this);
@@ -33,25 +33,26 @@ class Child extends React.Component {
 
 
   handleActiveClick(event) {
-    this.setState({state: "Active"});
+    this.setState({button: 'Active'});
   }
  
 
   handleDeletedClick(event) {
-    this.setState({state: "Deleted"});
+    this.setState({button: 'Deleted'});
   }
  
 
   handleAllClick(event) {
-    this.setState({state: "All"});
+    this.setState({button: 'All'});
   }
  
 
   render() {
+    const {array, button} = this.state;
     return (
       <div>
         <ul>
-          {this.state.array.map((item,index) => 
+          {array.map((item,index) => 
             <li key={index}>
               <button 
                 type = "button" value = {item.name}
@@ -76,12 +77,12 @@ class Child extends React.Component {
             onClick = {this.handleAllClick}>displayAllList
           </button>
           <h4 style = {{color: 'green'}}>
-            {this.state.state }
+            {button }
           </h4>
-            {this.state.array.map((item,index) => {
-              if ((this.state.array[index].isDeleted && this.state.state == "Deleted") ||
-                 (!this.state.array[index].isDeleted && this.state.state == "Active") ||
-                 (this.state.state == "All")) {
+            {array.map((item,index) => {
+              if ((array[index].isDeleted && button == 'Deleted') ||
+                 (!array[index].isDeleted && button == 'Active') ||
+                 (button == "All")) {
                 return <li key={index}>{item.name}</li>;
               }
             })}
