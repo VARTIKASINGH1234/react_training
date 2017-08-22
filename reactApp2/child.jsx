@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class Child extends React.Component { 
   constructor(props) {
     super(props);
-    this.state = {array: [], button: ""};
+    this.state = {nameList: [], selectedFilter: ""};
     this.handleClick = this.handleClick.bind(this);
     this.handleActiveClick = this.handleActiveClick.bind(this);
     this.handleDeletedClick = this.handleDeletedClick.bind(this);
@@ -13,46 +13,46 @@ class Child extends React.Component {
   
   
   componentWillReceiveProps(newProps) { 
-    let array = this.state.array.slice();
+    let nameList = this.state.nameList.slice();
     let object = {name: newProps.name, isDeleted: false, Color: ''};
-    if (!array.find((element) => (object.name == "" || element.name == object.name)))
-      array.push(object);
-    this.setState({ array: array });
+    if (!nameList.find((element) => (object.name == "" || element.name == object.name)))
+      nameList.push(object);
+    this.setState({ nameList: nameList });
   }
   
 
   handleClick(event) {
     let value = event.target.value;
-    let index = this.state.array.findIndex((object) => (object.name == value));
-    let item = this.state.array[index];
+    let index = this.state.nameList.findIndex((object) => (object.name == value));
+    let item = this.state.nameList[index];
     let stateCopy = Object.assign({}, this.state);
-    stateCopy.array[index].isDeleted = true;
-    stateCopy.array[index].Color = 'red';
+    stateCopy.nameList[index].isDeleted = true;
+    stateCopy.nameList[index].Color = 'red';
     this.setState(stateCopy);
   }
 
 
   handleActiveClick(event) {
-    this.setState({button: 'Active'});
+    this.setState({selectedFilter: 'Active'});
   }
  
 
   handleDeletedClick(event) {
-    this.setState({button: 'Deleted'});
+    this.setState({selectedFilter: 'Deleted'});
   }
  
 
   handleAllClick(event) {
-    this.setState({button: 'All'});
+    this.setState({selectedFilter: 'All'});
   }
  
 
   render() {
-    const {array, button} = this.state;
+    const {nameList, selectedFilter} = this.state;
     return (
       <div>
         <ul>
-          {array.map((item,index) => 
+          {nameList.map((item,index) => 
             <li key={index}>
               <button 
                 type = "button" value = {item.name}
@@ -77,12 +77,12 @@ class Child extends React.Component {
             onClick = {this.handleAllClick}>displayAllList
           </button>
           <h4 style = {{color: 'green'}}>
-            {button }
+            {selectedFilter }
           </h4>
-            {array.map((item,index) => {
-              if ((array[index].isDeleted && button == 'Deleted') ||
-                 (!array[index].isDeleted && button == 'Active') ||
-                 (button == "All")) {
+            {nameList.map((item,index) => {
+              if ((nameList[index].isDeleted && selectedFilter == 'Deleted') ||
+                 (!nameList[index].isDeleted && selectedFilter == 'Active') ||
+                 (selectedFilter == "All")) {
                 return <li key={index}>{item.name}</li>;
               }
             })}
