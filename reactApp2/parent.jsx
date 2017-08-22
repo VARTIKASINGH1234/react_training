@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Child from './child.jsx';
+import List from './list.jsx';
 import PropTypes from 'prop-types';
+
 
 class Parent extends React.Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class Parent extends React.Component {
         <p>
           <button type="button" onClick={this.handleButton}>Submit</button>
         </p>
-        <Child name = {this.state.name}></Child>
+        <List name = {this.state.name}></List>
       </form>
     );
   }
