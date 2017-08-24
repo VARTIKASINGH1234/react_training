@@ -33,14 +33,18 @@ class Parent extends React.Component {
     xhttp.send(input);
     this.refs.myInput.value = '';
     ReactDOM.findDOMNode(this.refs.myInput).focus();
-    let clientList = this.state.clientList.slice();
-    clientList.push(input);
-    this.setState({ clientList: clientList });
-
+    var clientList
+    xhttp.onreadystatechange = function() {
+      clientList = this.responseText;
+      console.log(clientList);
+    }; 
+    xhttp.open("GET", "http://localhost:8081/clients", false);
+    xhttp.send();
+    this.setState({clientList: JSON.parse(clientList)})
   }
 
 
-  render() {
+  render() { 
     return (
       <div>
         <List clientList = {this.state.clientList} />
@@ -50,6 +54,7 @@ class Parent extends React.Component {
     );
   }
 }
+
 
 export default Parent;
 
