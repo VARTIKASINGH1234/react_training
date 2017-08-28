@@ -1,4 +1,4 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Index from './Index.jsx';
-ReactDOM.render(<Index />, document.getElementById('app'));
+import Routes from './routes.jsx';
+ReactDOM.render(<Routes />, document.getElementById('app'));
