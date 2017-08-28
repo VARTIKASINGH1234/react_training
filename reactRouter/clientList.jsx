@@ -2,7 +2,10 @@ import React from 'react';
 import List from './list.jsx';
 import request from 'sync-request';
 import AddList from './addList.jsx';
-import { Router, Route, Link, IndexRoute, hashHistory, browserHistory, DefaultRoute } from 'react-router'
+import {Url} from './url';
+import {Router, Link} from 'react-router';
+
+
 class ClientList extends React.Component { 
   constructor(props) {
     super(props);
@@ -12,9 +15,8 @@ class ClientList extends React.Component {
 
   componentWillMount() {
     var clientList;
-    var res = request('GET', 'http://localhost:8081/clients');
-    console.log(res.getBody());
-    clientList = res.getBody()
+    var res = request('GET', Url());
+    clientList = res.getBody();
     this.setState({clientList: JSON.parse(clientList)})
   }
 
@@ -23,6 +25,7 @@ class ClientList extends React.Component {
     return (
       <div>
         <List clientList = {this.state.clientList} />
+        <Link to = '/'>Back</Link>&nbsp;
       </div>
     );
   }
