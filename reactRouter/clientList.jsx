@@ -3,13 +3,14 @@ import List from './list.jsx';
 import request from 'sync-request';
 import AddList from './addList.jsx';
 import {Url} from './url';
-import {Router, Link} from 'react-router';
+import {hashHistory} from 'react-router';
 
 
 class ClientList extends React.Component { 
   constructor(props) {
     super(props);
     this.state = {clientList: []}
+    this.onNavigateBack = this.onNavigateBack.bind(this);
   }
   
 
@@ -21,11 +22,16 @@ class ClientList extends React.Component {
   }
 
 
+  onNavigateBack(event) {
+    hashHistory.push('/');
+  }
+
+
   render() { 
     return (
       <div>
         <List clientList = {this.state.clientList} />
-        <Link to = '/'>Back</Link>&nbsp;
+        <button type = "button" onClick = {this.onNavigateBack}>Back</button>
       </div>
     );
   }
