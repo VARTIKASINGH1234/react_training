@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import List from './list.jsx';
 import request from 'sync-request';
 import ClientList from './clientList.jsx';
-import { Router, Route, Link, IndexRoute, hashHistory, browserHistory, DefaultRoute } from 'react-router'
+import {Url} from './url';
 
 
 class AddList extends React.Component { 
@@ -15,7 +15,7 @@ class AddList extends React.Component {
 
   handleClick (event) {
     let input = this.refs.myInput.value;
-    var res = request('POST', 'http://localhost:8081/clients', {
+    var res = request('POST', Url(), {
       headers: {
         "Content-Type": "application/json;charset=UTF-8"
       },
