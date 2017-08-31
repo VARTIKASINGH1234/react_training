@@ -26,7 +26,7 @@ class UserList extends Component {
 
 
   render() {
-    return (
+    const {selectFilter} = this.props;
       <div>
         <label>
           Name:
@@ -40,15 +40,15 @@ class UserList extends Component {
         </ul>
         <button 
           type="button" 
-          onClick = {() => this.props.selectFilter("Active")}>displayActiveList
+          onClick = {() => selectFilter("Active")}>displayActiveList
         </button>
         <button 
           type="button" 
-          onClick = {() => this.props.selectFilter("Deleted")}>displayDeletedList
+          onClick = {() => selectFilter("Deleted")}>displayDeletedList
         </button>  
         <button 
           type="button" 
-          onClick = {() => this.props.selectFilter("All")}>displayAllList
+          onClick = {() => selectFilter("All")}>displayAllList
         </button>
       </div>
     );
