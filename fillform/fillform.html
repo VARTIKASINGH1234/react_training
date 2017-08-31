@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+   <head>
+    <title> Fill the form. </title>
+    <style>
+      div.alert {
+        color: red;
+      } 
+      span.note {
+        color: red;
+    </style>
+  </head>
+  <body>   
+    <form>
+    <h1> Fill your details. </h1>
+    <h3>First Name<span class="note">*</span>: <input type="text"  id="fname" required /> </h3> 
+    <div class="alert">
+      <p id="fname2"></p>
+    </div> 
+
+    <h3>Last Name<span class="note">*</span>: <input type="text"  id="lname" required /></h3>
+    <div class="alert">
+      <p id="lname2"></p>
+    </div>
+
+    <h3>Email<span class="note">*</span>: <input type="email" id="mailid" placeholder="name@email.com" required /></h3>
+    <div class="alert">
+      <p id="mailid2"></p>
+    </div>
+
+    <h3>Address<span class="note">*</span>: <input type="text"  id="address" required /></h3>
+    <div class="alert">
+      <p id="address2"></p>
+    </div>
+
+    <h3>Phone Number<span class="note">*</span>: <input type = "text" id="phoneno" required /></h3>
+    <div class="alert">
+      <p id="phoneno2"></p>  
+    </div> 
+
+    <p><button type="button" onClick="myFunction('fname', 'lname', 'mailid', 'address', 'phoneno')">Submit</button></p>
+    </form>
+    <p id="fname1"></p>
+    <p id="lname1"></p>
+    <p id="mailid1"></p>
+    <p id="address1"></p>
+    <p id="phoneno1"></p>
+    <script src="fillform.js"></script>
+  </body>
+</html>
+
