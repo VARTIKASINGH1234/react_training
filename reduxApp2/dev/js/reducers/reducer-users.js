@@ -8,44 +8,48 @@ export default function (state = {}, action) {
 
   const validatePhoneNumber = (inputtxt) => {
     var pnumber = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-    if (inputtxt.match(pnumber)) return true;
-    else return false;
+    return (inputtxt.match(pnumber));
   }
 
 
   switch (action.type) {
     case 'ADD_USER':
-      console.log("entered")
       var {firstName, lastName, email, address, phoneNumber} = action.payload;
-      var valid = {firstName:null, lastName: null, 
-                   email:null, address: null, phoneNumber: null,
-                   firstNameError:null, lastNameError: null, 
-                   emailError:null, addressError: null, phoneNumberError: null };
+      var valid = {
+                   firstName: null,
+                   lastName: null,                    
+                   email: null, 
+                   address: null, 
+                   phoneNumber: null,
+                   firstNameError: null, 
+                   lastNameError: null, 
+                   emailError: null, 
+                   addressError: null, 
+                   phoneNumberError: null 
+                  };
 
-      if (firstName.trim() == '') 
-        valid.firstNameError = "Please fill the first name"; 
-      else 
-        valid.firstName = firstName.trim();
+      firstName = firstName.trim();
+      lastName = lastName.trim();
+      email = email.trim();
+      address = address.trim();
+      phoneNumber = phoneNumber.trim();
 
-      if (lastName.trim() == '') 
-        valid.lastNameError = "Please fill the last name";
-      else 
-        valid.lastName = lastName.trim();
+      valid.firstNameError = (!firstName) ? "Please fill the first name" : null; 
+      valid.firstName = (!!firstName) ? firstName : null;
 
-      if (!validateEmail(email.trim()))
-        valid.emailError = "Please fill the valid Email";
-      else 
-        valid.email = email.trim();
+      valid.lastNameError = (!lastName) ? "Please fill the last name" : null;
+      valid.lastName = (!!lastName) ? lastName : null;
 
-      if (address.trim() == '') 
-        valid.addressError = "Please fill the Address";
-      else 
-        valid.address =  address.trim();
+      valid.emailError = (!validateEmail(email)) ? "Please fill the valid Email" : null;
+      valid.email = (!!validateEmail(email)) ? email.trim() : null;
 
-      if (!validatePhoneNumber(phoneNumber.trim()))
-        valid.phoneNumberError = "Please fill the valid Phone Number";
-      else 
-        valid.phoneNumber = phoneNumber.trim();
+      valid.addressError = (!address) ? "Please fill the Address" : null;
+      valid.address = (!!address) ? address : null;
+
+      valid.phoneNumberError = (!validatePhoneNumber(phoneNumber)) ? 
+        "Please fill the valid Phone Number" : null;
+      valid.phoneNumber = (!!validatePhoneNumber(phoneNumber)) ? 
+        phoneNumber : null;
 
       return valid;
       break;
