@@ -1,6 +1,4 @@
-export const addUserDetails = (userDetails) => {
-  return {
-    type: 'ADD_USER',
-    payload: userDetails
-  }
-};
+export const addUserDetails = (userDetails) => ({
+  type: 'ADD_USER',
+  payload: userDetails
+ });
